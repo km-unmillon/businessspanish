@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FJ Lopez — Business Spanish</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; color: #1a1a18; background: #fff; }
+  
+  /* NAV */
+  nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0ec; }
+  .logo { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
+  .logo span { color: #c8a96e; }
+  .nav-lang { font-size: 13px; color: #888; cursor: pointer; border: 1px solid #ddd; padding: 5px 12px; border-radius: 20px; background: none; }
+  .nav-lang:hover { background: #f5f5f2; }
+
+  /* HERO */
+  .hero { background: #0f1923; color: #fff; padding: 80px 40px; text-align: center; }
+  .hero-tag { color: #c8a96e; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: #c8a96e; }
+  .hero p { font-size: 18px; color: #a0b4c0; max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: #c8a96e; color: #0f1923; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: none; cursor: pointer; }
+  .btn-secondary { background: transparent; color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+  .btn-primary:hover { background: #b8924f; }
+
+  /* SECTION */
+  section { padding: 72px 40px; max-width: 960px; margin: 0 auto; }
+  .section-tag { color: #c8a96e; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+  .section-sub { font-size: 16px; color: #666; line-height: 1.7; max-width: 600px; }
+
+  /* WHO */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 48px; }
+  .who-text p { font-size: 15px; color: #444; line-height: 1.8; margin-bottom: 16px; }
+  .who-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat { background: #f9f9f7; border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 700; color: #0f1923; }
+  .stat-label { font-size: 12px; color: #888; margin-top: 4px; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .service-card { border: 1px solid #e5e5e2; border-radius: 12px; padding: 28px; }
+  .service-icon { font-size: 28px; margin-bottom: 16px; }
+  .service-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .service-desc { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 16px; }
+  .service-price { font-size: 22px; font-weight: 700; color: #0f1923; }
+  .service-price span { font-size: 13px; font-weight: 400; color: #888; }
+  .service-badge { display: inline-block; background: #f0f7ff; color: #1e40af; font-size: 11px; padding: 3px 10px; border-radius: 20px; margin-top: 8px; }
+
+  /* FOR WHO */
+  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .audience-card { background: #f9f9f7; border-radius: 12px; padding: 24px; }
+  .audience-flag { font-size: 24px; margin-bottom: 12px; }
+  .audience-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .audience-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* HOW */
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+  .how-step { text-align: center; }
+  .how-num { width: 40px; height: 40px; border-radius: 50%; background: #0f1923; color: #c8a96e; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+  .how-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .how-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+  /* CTA */
+  .cta-section { background: #0f1923; color: #fff; padding: 72px 40px; text-align: center; }
+  .cta-section h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 700; margin-bottom: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta-section p { color: #a0b4c0; font-size: 16px; margin-bottom: 36px; }
+  .contact-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-wa { background: #25D366; color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .btn-email { background: transparent; color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; gap: 8px; }
+  .btn-wa:hover { background: #1ebe5d; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid #f0f0ec; }
+
+  /* FOOTER */
+  footer { padding: 32px 40px; text-align: center; font-size: 13px; color: #aaa; }
+  footer a { color: #c8a96e; text-decoration: none; }
+
+  /* LANG TOGGLE */
+  .lang-en .es { display: none; }
+  .lang-es .en { display: none; }
+
+  @media (max-width: 700px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 60px 20px; }
+    section { padding: 52px 20px; }
+    .who-grid, .services-grid, .audience-grid, .how-grid { grid-template-columns: 1fr; }
+    .who-stats { grid-template-columns: 1fr 1fr; }
+    .cta-section { padding: 52px 20px; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body class="lang-en">
+
+<nav>
+  <div class="logo">FJ Lopez <span>·</span> Business Spanish</div>
+  <button class="nav-lang" onclick="toggleLang()">
+    <span class="en">🇲🇽 Ver en Español</span>
+    <span class="es">🇺🇸 View in English</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">
+    <span class="en">Business Spanish · Mexicali, BC · Online & In-Person</span>
+    <span class="es">Español de Negocios · Mexicali, BC · En línea y Presencial</span>
+  </div>
+  <h1>
+    <span class="en">Spanish that works<br>in <span>real business</span> situations</span>
+    <span class="es">Español que funciona<br>en situaciones <span>reales de negocios</span></span>
+  </h1>
+  <p>
+    <span class="en">I help non-Hispanic executives and professionals communicate in Spanish with confidence — for meetings, negotiations, and leadership with Latin American teams.</span>
+    <span class="es">Ayudo a ejecutivos y profesionales no hispanohablantes a comunicarse en español con confianza — para reuniones, negociaciones y liderazgo con equipos latinoamericanos.</span>
+  </p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">
+      <span class="en">Book a Free Demo Session</span>
+      <span class="es">Solicitar Sesión Demo Gratis</span>
+    </a>
+    <a href="#services" class="btn-secondary">
+      <span class="en">View Programs</span>
+      <span class="es">Ver Programas</span>
+    </a>
+  </div>
+</div>
+
+<!-- WHO AM I -->
+<section>
+  <div class="section-tag">
+    <span class="en">About</span>
+    <span class="es">Acerca de mí</span>
+  </div>
+  <div class="who-grid">
+    <div class="who-text">
+      <div class="section-title">
+        <span class="en">Native Spanish speaker from the US-Mexico border</span>
+        <span class="es">Hablante nativo de español en la frontera México-EE.UU.</span>
+      </div>
+      <p>
+        <span class="en">I'm Francisco Javier Lopez Lima, a Business Spanish instructor based in Mexicali, Baja California — right on the US-Mexico border.</span>
+        <span class="es">Soy Francisco Javier Lopez Lima, instructor de Español de Negocios basado en Mexicali, Baja California — en la frontera México-EE.UU.</span>
+      </p>
+      <p>
+        <span class="en">I specialize in teaching practical, real-world Spanish to executives and professionals who need it for business with Mexico and Latin America — not textbook exercises.</span>
+        <span class="es">Me especializo en enseñar español práctico a ejecutivos y profesionales que lo necesitan para hacer negocios con México y Latinoamérica — no ejercicios de libro de texto.</span>
+      </p>
+      <p>
+        <span class="en">Available for individual sessions on Preply and corporate group training via Google Meet or in-person in Mexicali.</span>
+        <span class="es">Disponible para sesiones individuales en Preply y capacitación grupal corporativa por Google Meet o presencial en Mexicali.</span>
+      </p>
+    </div>
+    <div class="who-stats">
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">
+          <span class="en">Cities served</span>
+          <span class="es">Ciudades atendidas</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">
+          <span class="en">Target audiences</span>
+          <span class="es">Audiencias objetivo</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">
+          <span class="en">Native Spanish</span>
+          <span class="es">Español nativo</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">C1</div>
+        <div class="stat-label">
+          <span class="en">English level</span>
+          <span class="es">Nivel de inglés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FOR WHO -->
+<section>
+  <div class="section-tag">
+    <span class="en">Who is this for</span>
+    <span class="es">¿Para quién es esto?</span>
+  </div>
+  <div class="section-title">
+    <span class="en">Three audiences, one goal: communicate with confidence</span>
+    <span class="es">Tres audiencias, un objetivo: comunicarse con confianza</span>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-flag">🇺🇸</div>
+      <div class="audience-title">
+        <span class="en">English-speaking executives</span>
+        <span class="es">Ejecutivos angloparlantes</span>
+      </div>
+      <div class="audience-desc">
+        <span class="en">Working with Mexican teams, suppliers or clients and need functional Spanish for the workplace.</span>
+        <span class="es">Trabajan con equipos, proveedores o clientes mexicanos y necesitan español funcional para el trabajo.</span>
+      </div>
+    </div>
+    <div class="audience-card">
+      <div class="audience-flag">🇨🇳</div>
+      <div class="audience-title">
+        <span class="en">Chinese executives</span>
+        <span class="es">Ejecutivos chinos</span>
+      </div>
+      <div class="audience-desc">
+        <span class="en">Expanding into Latin America and need Spanish for negotiations and business relationships. Classes conducted in English.</span>
+        <span class="es">Expandiéndose a Latinoamérica y necesitan español para negociaciones y relaciones comerciales. Clases en inglés.</span>
+      </div>
+    </div>
+    <div class="audience-card">
+      <div class="audience-flag">🏭</div>
+      <div class="audience-title">
+        <span class="en">Maquiladora managers</span>
+        <span class="es">Gerentes de maquiladoras</span>
+      </div>
+      <div class="audience-desc">
+        <span class="en">Non-Hispanic plant managers and directors in Mexicali, Tijuana and Ensenada who lead Mexican teams daily.</span>
+        <span class="es">Gerentes y directores no hispanos en Mexicali, Tijuana y Ensenada que lideran equipos mexicanos a diario.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag">
+    <span class="en">Programs & Pricing</span>
+    <span class="es">Programas y Precios</span>
+  </div>
+  <div class="section-title">
+    <span class="en">Choose the format that fits your team</span>
+    <span class="es">Elige el formato que se adapta a tu equipo</span>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">👤</div>
+      <div class="service-title">
+        <span class="en">Individual Sessions</span>
+        <span class="es">Sesiones Individuales</span>
+      </div>
+      <div class="service-desc">
+        <span class="en">1-on-1 personalized sessions focused on your specific work situations. Available on Preply.</span>
+        <span class="es">Sesiones personalizadas 1 a 1 enfocadas en tus situaciones laborales específicas. Disponible en Preply.</span>
+      </div>
+      <div class="service-price">$19 <span>USD / hour</span></div>
+      <div class="service-badge">
+        <span class="en">via Preply</span>
+        <span class="es">vía Preply</span>
+      </div>
+    </div>
+    <div class="service-card" style="border-color:#c8a96e;">
+      <div class="service-icon">👥</div>
+      <div class="service-title">
+        <span class="en">Group Corporate Training</span>
+        <span class="es">Capacitación Grupal Corporativa</span>
+      </div>
+      <div class="service-desc">
+        <span class="en">Groups of 3–8 executives. Practical content focused on your industry and real work situations.</span>
+        <span class="es">Grupos de 3 a 8 ejecutivos. Contenido práctico enfocado en tu industria y situaciones reales de trabajo.</span>
+      </div>
+      <div class="service-price">$80 <span>USD / hour</span></div>
+      <div class="service-badge" style="background:#fff8e6;color:#854d0e;">
+        <span class="en">Most popular</span>
+        <span class="es">Más popular</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📅</div>
+      <div class="service-title">
+        <span class="en">Monthly Package</span>
+        <span class="es">Paquete Mensual</span>
+      </div>
+      <div class="service-desc">
+        <span class="en">8 group sessions per month. Consistent progress with a structured program. Invoicing available.</span>
+        <span class="es">8 sesiones grupales al mes. Progreso constante con programa estructurado. Se puede facturar.</span>
+      </div>
+      <div class="service-price">$600 <span>USD / month</span></div>
+      <div class="service-badge" style="background:#e8f4e8;color:#2a6e2a;">
+        <span class="en">Best value</span>
+        <span class="es">Mejor valor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="section-tag">
+    <span class="en">How it works</span>
+    <span class="es">Cómo funciona</span>
+  </div>
+  <div class="section-title">
+    <span class="en">From first contact to first lesson in 48 hours</span>
+    <span class="es">Del primer contacto a la primera clase en 48 horas</span>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-title">
+        <span class="en">Contact us</span>
+        <span class="es">Contáctanos</span>
+      </div>
+      <div class="how-desc">
+        <span class="en">WhatsApp or email. Tell us your team size and goals.</span>
+        <span class="es">WhatsApp o email. Cuéntanos el tamaño de tu equipo y objetivos.</span>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-title">
+        <span class="en">Free demo session</span>
+        <span class="es">Sesión demo gratis</span>
+      </div>
+      <div class="how-desc">
+        <span class="en">30-minute session at no cost. No commitment required.</span>
+        <span class="es">30 minutos sin costo. Sin compromiso.</span>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-title">
+        <span class="en">Custom program</span>
+        <span class="es">Programa personalizado</span>
+      </div>
+      <div class="how-desc">
+        <span class="en">We design content around your industry and team needs.</span>
+        <span class="es">Diseñamos el contenido según tu industria y necesidades.</span>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">4</div>
+      <div class="how-title">
+        <span class="en">Start learning</span>
+        <span class="es">Empieza a aprender</span>
+      </div>
+      <div class="how-desc">
+        <span class="en">Via Google Meet or in-person in Mexicali. We invoice in MXN or USD.</span>
+        <span class="es">Por Google Meet o presencial en Mexicali. Facturamos en MXN o USD.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="contact">
+  <h2>
+    <span class="en">Ready to communicate in Spanish with confidence?</span>
+    <span class="es">¿Listo para comunicarte en español con confianza?</span>
+  </h2>
+  <p>
+    <span class="en">Book a free 30-minute demo session. No commitment required.</span>
+    <span class="es">Solicita una sesión demo de 30 minutos gratis. Sin compromiso.</span>
+  </p>
+  <div class="contact-btns">
+    <a href="https://wa.me/526867907298" class="btn-wa">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="mailto:lopezlimaf@gmail.com" class="btn-email">
+      ✉️ Email
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <span class="en">© 2026 FJ Lopez — Business Spanish · Mexicali, Baja California, Mexico · <a href="https://preply.com/en/tutor/7240924">Individual sessions on Preply</a></span>
+    <span class="es">© 2026 FJ Lopez — Business Spanish · Mexicali, Baja California, México · <a href="https://preply.com/en/tutor/7240924">Sesiones individuales en Preply</a></span>
+  </p>
+</footer>
+
+<script>
+function toggleLang() {
+  const body = document.body;
+  if (body.classList.contains('lang-en')) {
+    body.classList.remove('lang-en');
+    body.classList.add('lang-es');
+  } else {
+    body.classList.remove('lang-es');
+    body.classList.add('lang-en');
+  }
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
